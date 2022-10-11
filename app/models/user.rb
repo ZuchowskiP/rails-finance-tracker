@@ -12,6 +12,11 @@ class User < ApplicationRecord
     stocks.where(id: stock.id).exists?
   end
 
+  def full_name
+    return "#{name} #{last_name}" if name || last_name
+    "Anonymous"
+  end
+
   def under_stock_limit?
     stocks.count < 10
   end
