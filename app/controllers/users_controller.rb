@@ -12,11 +12,11 @@ class UsersController < ApplicationController
     if params[:friend].present?
       @friends = User.search(params[:friend])
       @friends = current_user.except_current_user(@friends)
-      if @friends
+      if @friends.length != 0
         respond_to do |format|
           format.js { render partial: 'users/friend_result' }
         end
-      else
+      elsif @friends
         respond_to do |format|
           flash.now[:alert] = "Please enter a valid symbol to search"
           format.js { render partial: 'users/friend_result' }
