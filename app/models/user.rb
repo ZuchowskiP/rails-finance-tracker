@@ -13,7 +13,11 @@ class User < ApplicationRecord
   end
 
   def full_name
-    return "#{name} #{last_name}" if name || last_name
+    if name || last_name
+      if name.length != 0 or last_name.length != 0
+        return "#{name} #{last_name}"
+      end
+    end
     "Anonymous"
   end
 
